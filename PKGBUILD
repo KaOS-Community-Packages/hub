@@ -14,12 +14,14 @@ _package="github.com/github/${pkgname}"
 prepare() {
 	mkdir -p "src/${_package}"
 	cp -r "${pkgname}-${pkgver}/"* "src/${_package}"
-	export GOPATH=$GOPATH:"${srcdir}"
+	_OLDGOPATH=$GOPATH
+	export GOPATH=${srcdir}
 }
 
 build() {
 	[[ -e build ]] || mkdir build
 	go build -v -o "build/${pkgname}" "src/${_package}/main.go"
+	export GOPATH=$_OLDGOPATH
 }
 
 package() {
