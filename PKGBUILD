@@ -1,32 +1,19 @@
 pkgname=hub
-pkgver=2.2.9
+pkgver=2.3.0
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
 url='https://hub.github.com/'
 license=('MIT')
 depends=('git')
-makedepends=('go')
+makedepends=('go' 'ruby' 'ruby-bundler')
 source=("https://github.com/github/${pkgname}/archive/v${pkgver}.tar.gz")
-md5sums=('0469114903f572fe5290d46a0911288e')
-_package="github.com/github/${pkgname}"
-
-prepare() {
-	mkdir -p "src/${_package}"
-	cp -r "${pkgname}-${pkgver}/"* "src/${_package}"
-	_OLDGOPATH=$GOPATH
-	export GOPATH=${srcdir}
-}
-
-build() {
-	[[ -e build ]] || mkdir build
-	go build -v -o "build/${pkgname}" "src/${_package}/main.go"
-	export GOPATH=$_OLDGOPATH
-}
+md5sums=('a04ae64b3802c1348a2d8eb43c84d027')
 
 package() {
-	install -Dm755 "build/${pkgname}" "${pkgdir}/usr/bin/${pkgname}"
-	install -Dm644 "src/${_package}/etc/hub.bash_completion.sh" "${pkgdir}/etc/bash_completion.d/${pkgname}"
-	install -Dm644 "src/${_package}/etc/hub.zsh_completion" "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
-	install -Dm644 "src/${_package}/man/hub.1" "${pkgdir}/usr/share/man/man1/${pkgname}.1"
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make install prefix="${pkgdir}/usr"
+	install -Dm644 "etc/hub.bash_completion.sh" "${pkgdir}/etc/bash_completion.d/${pkgname}"
+	install -Dm644 "etc/hub.zsh_completion" "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
+	install -Dm644 "etc/hub.fish_completion" "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
 }
