@@ -1,5 +1,5 @@
 pkgname=hub
-pkgver=2.3.0
+pkgver=2.4.0
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
@@ -8,7 +8,7 @@ license=('MIT')
 depends=('git')
 makedepends=('go' 'ruby' 'ruby-bundler')
 source=("https://github.com/github/${pkgname}/archive/v${pkgver}.tar.gz")
-md5sums=('a04ae64b3802c1348a2d8eb43c84d027')
+md5sums=('7c8d1cb96a1522584a9b679f3d4ef3a7')
 
 package() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
