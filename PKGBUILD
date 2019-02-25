@@ -1,5 +1,5 @@
 pkgname=hub
-pkgver=2.9.0
+pkgver=2.10.0
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
@@ -7,7 +7,7 @@ url='https://hub.github.com/'
 license=('MIT')
 depends=('git')
 source=("https://github.com/github/${pkgname}/releases/download/v${pkgver}/hub-linux-amd64-${pkgver}.tgz")
-md5sums=('f7c241987d5f9345555d934e1ae1f00c')
+md5sums=('bf214e9350ee3cb40b65dcbc634887a4')
 
 package() {
 	cd "${srcdir}/${pkgname}-linux-amd64-${pkgver}"
