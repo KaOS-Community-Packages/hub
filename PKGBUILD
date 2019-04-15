@@ -1,19 +1,32 @@
 pkgname=hub
-pkgver=2.11.1
+pkgver=2.11.2
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
 url='https://hub.github.com/'
 license=('MIT')
 depends=('git')
-source=("https://github.com/github/${pkgname}/releases/download/v${pkgver}/hub-linux-amd64-${pkgver}.tgz")
-md5sums=('6bcc6a7c496ad53d80d4a45feb69e7fb')
+makedepends=('go')
+source=("https://github.com/github/${pkgname}/archive/v${pkgver}.tar.gz")
+md5sums=('8db3c2ae7d850c1f698cd2bbf5206b55')
+_basedir="src/github.com/github"
+
+prepare() {
+	_basedir="${srcdir}/${_basedir}"
+	mkdir -p "${_basedir}"
+	mv "${srcdir}/${pkgname}-${pkgver}" "${_basedir}/hub"
+}
+
+build() {
+	cd "${_basedir}/hub"
+	export GOPATH="${srcdir}"
+	make
+	make man-pages
+}
 
 package() {
-	cd "${srcdir}/${pkgname}-linux-amd64-${pkgver}"
-	mkdir "${pkgdir}/usr"
-	cp -a bin share "${pkgdir}/usr"
-	rm "${pkgdir}/usr/share/man/man1/"*.txt
+	cd "${_basedir}/hub"
+	make PREFIX="${pkgdir}/usr" install
 	install -Dm644 "etc/hub.bash_completion.sh" "${pkgdir}/etc/bash_completion.d/${pkgname}"
 	install -Dm644 "etc/hub.zsh_completion" "${pkgdir}/usr/share/zsh/site-functions/_${pkgname}"
 	install -Dm644 "etc/hub.fish_completion" "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
