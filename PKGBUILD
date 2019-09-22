@@ -1,5 +1,5 @@
 pkgname=hub
-pkgver=2.12.5
+pkgver=2.12.6
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
@@ -32,3 +32,4 @@ package() {
 	install -Dm644 "etc/hub.fish_completion" "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
+md5sums=('19848835c7c3115d75774e152f717105')
