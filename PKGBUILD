@@ -1,5 +1,5 @@
 pkgname=hub
-pkgver=2.12.6
+pkgver=2.12.7
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
@@ -8,7 +8,7 @@ license=('MIT')
 depends=('git')
 makedepends=('go')
 source=("https://github.com/github/${pkgname}/archive/v${pkgver}.tar.gz")
-md5sums=('7b0b5f6db6da8ad913b62d5833103342')
+md5sums=('ad7b279e051b6b267b390b11ca09ee02')
 _basedir="src/github.com/github"
 
 prepare() {
@@ -32,4 +32,3 @@ package() {
 	install -Dm644 "etc/hub.fish_completion" "${pkgdir}/usr/share/fish/vendor_completions.d/${pkgname}.fish"
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
-md5sums=('19848835c7c3115d75774e152f717105')
