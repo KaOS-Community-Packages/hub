@@ -1,5 +1,5 @@
 pkgname=hub
-pkgver=2.12.7
+pkgver=2.12.8
 pkgrel=1
 pkgdesc='A command-line wrapper for git that makes you better at GitHub'
 arch=('x86_64')
@@ -8,7 +8,7 @@ license=('MIT')
 depends=('git')
 makedepends=('go')
 source=("https://github.com/github/${pkgname}/archive/v${pkgver}.tar.gz")
-md5sums=('ad7b279e051b6b267b390b11ca09ee02')
+md5sums=('5f687c1b6aa5b9b71eb4d4376e3fd9be')
 _basedir="src/github.com/github"
 
 prepare() {
